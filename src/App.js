@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Navbar from "./components/Layout/Navbar";
+import Footer from "./components/Layout/Footer";
+import Landing from "./components/Home/Landing";
+import Movie from './components/Home/Movie';
+import store from "./Redux/store";
+import {Provider} from "react-redux";
+import cors from "cors";
+import {HashRouter as Router, Route} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+
+  render(){
+    return (
+      <Provider store={store}>
+        <Router>
+        <div className="App">
+        <Navbar />
+        <Route exact path='/' component={Landing} />
+        <Route exact path='/movie/:id' component={Movie} />
+        <div className="footer">
+        <Footer />
+        </div>
+      </div>
+        </Router>
+      </Provider>
+    );
+  }
 }
 
 export default App;
